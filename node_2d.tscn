@@ -1,0 +1,474 @@
+[gd_scene load_steps=14 format=3 uid="uid://crvhnmvk54nx0"]
+
+[ext_resource type="Texture2D" uid="uid://b7o1h6w0b2wfb" path="res://sprites/hexagon_pattern.png" id="1_ihquw"]
+[ext_resource type="Texture2D" uid="uid://be4g673t2pe55" path="res://sprites/border_top.png" id="2_dhv2o"]
+[ext_resource type="Texture2D" uid="uid://bgowpoqpj8dva" path="res://sprites/border_left.png" id="3_0goo4"]
+[ext_resource type="Texture2D" uid="uid://b7kmnocjd1vyc" path="res://sprites/border_right.png" id="4_4ra7l"]
+[ext_resource type="Script" path="res://player.gd" id="5_1lbuy"]
+[ext_resource type="Texture2D" uid="uid://d3tqon74w1mdv" path="res://sprites/racket.png" id="5_8mupe"]
+[ext_resource type="Script" path="res://ball.gd" id="7_h2o3b"]
+[ext_resource type="Texture2D" uid="uid://dfmb6nibrt262" path="res://sprites/ball.png" id="8_dcyjd"]
+[ext_resource type="Texture2D" uid="uid://blp6410n8o6l3" path="res://sprites/block_blue.png" id="9_4lvot"]
+[ext_resource type="Texture2D" uid="uid://d0ievv56303tm" path="res://sprites/block_green.png" id="10_tf1dt"]
+[ext_resource type="Texture2D" uid="uid://dsitjg33fod0t" path="res://sprites/block_pink.png" id="11_4h8ll"]
+[ext_resource type="Texture2D" uid="uid://diw2ucrpwu5uk" path="res://sprites/block_red.png" id="12_o76kt"]
+[ext_resource type="Texture2D" uid="uid://t01p575mmyvm" path="res://sprites/block_yellow.png" id="13_dulbg"]
+
+[node name="Main" type="Node2D"]
+position = Vector2(4, 2)
+
+[node name="Level" type="Node2D" parent="."]
+position = Vector2(2, 2)
+
+[node name="BorderTop" type="Sprite2D" parent="Level"]
+position = Vector2(104, -1)
+texture = ExtResource("2_dhv2o")
+
+[node name="Wall_Top" type="StaticBody2D" parent="Level/BorderTop"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/BorderTop/Wall_Top"]
+polygon = PackedVector2Array(-110, 3.5, -110, -3.5, 110, -3.5, 110, 3.5)
+
+[node name="BorderLeft" type="Sprite2D" parent="Level"]
+position = Vector2(-3, 117)
+texture = ExtResource("3_0goo4")
+
+[node name="Wall_Left" type="StaticBody2D" parent="Level/BorderLeft"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/BorderLeft/Wall_Left"]
+position = Vector2(0, 4.35114e-06)
+polygon = PackedVector2Array(-3, 115, -3, -115, 3, -115, 3, 115)
+
+[node name="BorderRight" type="Sprite2D" parent="Level"]
+position = Vector2(211, 117)
+texture = ExtResource("4_4ra7l")
+
+[node name="Wall_Right" type="StaticBody2D" parent="Level/BorderRight"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/BorderRight/Wall_Right"]
+polygon = PackedVector2Array(-3, 115, -3, -115, 3, -115, 3, 115)
+
+[node name="Background" type="Sprite2D" parent="Level"]
+position = Vector2(104, 118)
+texture = ExtResource("1_ihquw")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(108, 121)
+script = ExtResource("5_1lbuy")
+
+[node name="SpritePlayer" type="Sprite2D" parent="Player"]
+position = Vector2(0.258743, 101.057)
+texture = ExtResource("5_8mupe")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+position = Vector2(0.258749, 100.057)
+rotation = -0.000919568
+scale = Vector2(1, 1.00359)
+polygon = PackedVector2Array(12.7385, 2.94414, 15.7422, -1.03882, 12.745, -4.03082, -13.255, -4.05464, -16.2578, -1.06813, -13.2615, 2.92032)
+
+[node name="Ball" type="CharacterBody2D" parent="." groups=["Blocks"]]
+position = Vector2(109, 206)
+disable_mode = 2
+script = ExtResource("7_h2o3b")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+position = Vector2(-0.999997, -2.86102e-06)
+scale = Vector2(0.999997, 1.2)
+texture = ExtResource("8_dcyjd")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ball"]
+position = Vector2(-0.797919, 0.0999999)
+scale = Vector2(0.829427, 1.02083)
+polygon = PackedVector2Array(-3.81538, 3, -3.81538, -3, 3.56923, -3, 3.56923, 3)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(106, 117)
+zoom = Vector2(2.5, 2.5)
+
+[node name="Blocs" type="Node2D" parent="."]
+position = Vector2(20, 18)
+
+[node name="Block_Blue" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(87, 3)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Blue"]
+texture = ExtResource("9_4lvot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Blue"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Green" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(87, 14)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Green"]
+texture = ExtResource("10_tf1dt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Green"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Pink" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(87, 25)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Pink"]
+texture = ExtResource("11_4h8ll")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Pink"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Red" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(87, 36)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Red"]
+texture = ExtResource("12_o76kt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Red"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Yellow" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(87, 47)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Yellow"]
+texture = ExtResource("13_dulbg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Yellow"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Blue2" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(109, 3)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Blue2"]
+texture = ExtResource("9_4lvot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Blue2"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Green2" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(109, 14)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Green2"]
+texture = ExtResource("10_tf1dt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Green2"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Pink2" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(109, 25)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Pink2"]
+texture = ExtResource("11_4h8ll")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Pink2"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Red2" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(109, 36)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Red2"]
+texture = ExtResource("12_o76kt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Red2"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Yellow2" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(109, 47)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Yellow2"]
+texture = ExtResource("13_dulbg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Yellow2"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Blue3" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(64, 3)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Blue3"]
+texture = ExtResource("9_4lvot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Blue3"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Green3" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(64, 14)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Green3"]
+texture = ExtResource("10_tf1dt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Green3"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Pink3" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(64, 25)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Pink3"]
+texture = ExtResource("11_4h8ll")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Pink3"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Red3" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(64, 36)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Red3"]
+texture = ExtResource("12_o76kt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Red3"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Yellow3" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(64, 47)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Yellow3"]
+texture = ExtResource("13_dulbg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Yellow3"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Blue4" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(42, 3)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Blue4"]
+texture = ExtResource("9_4lvot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Blue4"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Green4" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(42, 14)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Green4"]
+texture = ExtResource("10_tf1dt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Green4"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Pink4" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(42, 25)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Pink4"]
+texture = ExtResource("11_4h8ll")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Pink4"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Red4" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(42, 36)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Red4"]
+texture = ExtResource("12_o76kt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Red4"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Yellow4" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(42, 47)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Yellow4"]
+texture = ExtResource("13_dulbg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Yellow4"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Blue5" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(131, 3)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Blue5"]
+texture = ExtResource("9_4lvot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Blue5"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Green5" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(131, 14)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Green5"]
+texture = ExtResource("10_tf1dt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Green5"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Pink5" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(131, 25)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Pink5"]
+texture = ExtResource("11_4h8ll")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Pink5"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Red5" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(131, 36)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Red5"]
+texture = ExtResource("12_o76kt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Red5"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Yellow5" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(131, 47)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Yellow5"]
+texture = ExtResource("13_dulbg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Yellow5"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Blue6" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(153, 3)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Blue6"]
+texture = ExtResource("9_4lvot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Blue6"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Green6" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(153, 14)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Green6"]
+texture = ExtResource("10_tf1dt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Green6"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Pink6" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(153, 25)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Pink6"]
+texture = ExtResource("11_4h8ll")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Pink6"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Red6" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(153, 36)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Red6"]
+texture = ExtResource("12_o76kt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Red6"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Yellow6" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(153, 47)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Yellow6"]
+texture = ExtResource("13_dulbg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Yellow6"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Blue7" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(20, 3)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Blue7"]
+texture = ExtResource("9_4lvot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Blue7"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Green7" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(20, 14)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Green7"]
+texture = ExtResource("10_tf1dt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Green7"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Pink7" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(20, 25)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Pink7"]
+texture = ExtResource("11_4h8ll")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Pink7"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Red7" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(20, 36)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Red7"]
+texture = ExtResource("12_o76kt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Red7"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
+
+[node name="Block_Yellow7" type="StaticBody2D" parent="Blocs" groups=["Blocks"]]
+position = Vector2(20, 47)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocs/Block_Yellow7"]
+texture = ExtResource("13_dulbg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Blocs/Block_Yellow7"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(-8, 4, -8, -4, 8, -4, 8, 4)
